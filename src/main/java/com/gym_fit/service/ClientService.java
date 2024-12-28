@@ -13,7 +13,7 @@ public class ClientService implements IClientService {
     }
 
     @Override
-    public Client findClientById() {
+    public Client findClientById(Integer idClient) {
         return null;
     }
 
