@@ -113,6 +113,8 @@ public class GymFitForm extends JFrame {
         nameText.setText("");
         lastNameText.setText("");
         membershipText.setText("");
+        this.idClient = null;
+        this.clientTable.getSelectionModel().clearSelection();
     }
 
     private void showMessage(String enterAName) {
