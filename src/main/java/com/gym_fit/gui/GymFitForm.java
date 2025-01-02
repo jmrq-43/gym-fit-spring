@@ -1,5 +1,6 @@
 package com.gym_fit.gui;
 
+import com.gym_fit.model.Client;
 import com.gym_fit.service.ClientService;
 import com.gym_fit.service.IClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.ActionListener;
 
 @Component
 public class GymFitForm extends JFrame {
@@ -26,20 +26,20 @@ public class GymFitForm extends JFrame {
     public GymFitForm(ClientService clientService) {
         this.clientService = clientService;
         startForm();
+        saveButton.addActionListener(e -> saveClient());
     }
 
     private void startForm() {
-
         setContentPane(mainPanel);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(900,700);
+        setSize(900, 700);
         setLocationRelativeTo(null);
     }
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
-        this.tableModel = new DefaultTableModel(0,4);
-        String[] headers = {"id","name","last name","membership"};
+        this.tableModel = new DefaultTableModel(0, 4);
+        String[] headers = {"id", "name", "last name", "membership"};
         this.tableModel.setColumnIdentifiers(headers);
         this.clientTable = new JTable(tableModel);
         listClients();
@@ -57,5 +57,37 @@ public class GymFitForm extends JFrame {
             };
             this.tableModel.addRow(clientLine);
         });
+    }
+
+    private void saveClient() {
+        if (nameText.getText().isEmpty()) {
+            showMessage("Enter a name");
+            nameText.requestFocusInWindow();
+            return;
+        }
+        if (membershipText.getText().isEmpty()) {
+            showMessage("Enter a memebership");
+            nameText.requestFocusInWindow();
+            return;
+        }
+
+        var name = nameText.getText();
+        var lastName = lastNameText.getText();
+        var membership = Integer.parseInt(membershipText.getText());
+
+        var client = new Client(name, lastName, membership);
+        this.clientService.saveClient(client);
+        cleanform();
+        listClients();
+    }
+
+    private void cleanform() {
+        nameText.setText("");
+        lastNameText.setText("");
+        membershipText.setText("");
+    }
+
+    private void showMessage(String enterAName) {
+        JOptionPane.showMessageDialog(this, enterAName);
     }
 }
