@@ -13,5 +13,4 @@ public interface IClientService {
 
     public void deleteClient(Client client);
 
-
 }
