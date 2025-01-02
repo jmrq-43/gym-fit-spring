@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 @Component
 public class GymFitForm extends JFrame {
@@ -21,12 +23,20 @@ public class GymFitForm extends JFrame {
     private JButton deleteButton;
     private JButton clearButton;
     private DefaultTableModel tableModel;
+    private Integer idClient;
 
     @Autowired
     public GymFitForm(ClientService clientService) {
         this.clientService = clientService;
         startForm();
         saveButton.addActionListener(e -> saveClient());
+        clientTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                loadClientSelected();
+            }
+        });
     }
 
     private void startForm() {
@@ -79,6 +89,20 @@ public class GymFitForm extends JFrame {
         this.clientService.saveClient(client);
         cleanform();
         listClients();
+    }
+
+    private void loadClientSelected() {
+        var row = clientTable.getSelectedRow();
+        if (row != -1) {
+            var id = clientTable.getModel().getValueAt(row, 0).toString();
+            this.idClient = Integer.parseInt(id);
+            var name = clientTable.getModel().getValueAt(row, 1).toString();
+            this.nameText.setText(name);
+            var lastName = clientTable.getModel().getValueAt(row, 2).toString();
+            this.lastNameText.setText(lastName);
+            var membership = clientTable.getModel().getValueAt(row, 3).toString();
+            this.membershipText.setText(membership);
+        }
     }
 
     private void cleanform() {
