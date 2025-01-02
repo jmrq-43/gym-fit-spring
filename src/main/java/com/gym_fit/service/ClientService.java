@@ -15,14 +15,12 @@ public class ClientService implements IClientService {
 
     @Override
     public List<Client> listClients() {
-        List<Client> clients = clienteRepository.findAll();
-        return clients;
+        return clienteRepository.findAll();
     }
 
     @Override
     public Client findClientById(Integer idClient) {
-        Client client = clienteRepository.findById(idClient).orElse(null);
-        return client;
+        return clienteRepository.findById(idClient).orElse(null);
     }
 
     @Override
