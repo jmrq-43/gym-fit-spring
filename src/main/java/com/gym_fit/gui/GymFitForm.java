@@ -87,6 +87,10 @@ public class GymFitForm extends JFrame {
 
         var client = new Client(this.idClient, name, lastName, membership);
         this.clientService.saveClient(client);
+        if (this.idClient == null) {
+            showMessage("added new client");
+        } else
+            showMessage("updated client");
         cleanform();
         listClients();
     }
