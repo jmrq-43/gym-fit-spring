@@ -9,13 +9,16 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode
 @Entity
+@RequiredArgsConstructor
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NonNull
     private String name;
+    @NonNull
+    private String LASTNAME;
+    @NonNull
     private Integer membership;
 }
