@@ -3,6 +3,7 @@ package com.gym_fit.gui;
 import com.gym_fit.model.Client;
 import com.gym_fit.service.ClientService;
 import com.gym_fit.service.IClientService;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -37,6 +38,7 @@ public class GymFitForm extends JFrame {
                 loadClientSelected();
             }
         });
+        deleteButton.addActionListener(e -> deleteClient());
     }
 
     private void startForm() {
@@ -107,6 +109,21 @@ public class GymFitForm extends JFrame {
             var membership = clientTable.getModel().getValueAt(row, 3).toString();
             this.membershipText.setText(membership);
         }
+    }
+
+    private void deleteClient() {
+        var row = clientTable.getSelectedRow();
+        if (row != -1) {
+            var idClientSTR = clientTable.getModel().getValueAt(row, 0).toString();
+            this.idClient = Integer.parseInt(idClientSTR);
+            var client = new Client();
+            client.setId(this.idClient);
+            clientService.deleteClient(client);
+            showMessage("client id " + this.idClient + " was deleted ");
+            cleanform();
+            listClients();
+        } else
+            showMessage("You must selecte a client");
     }
 
     private void cleanform() {
