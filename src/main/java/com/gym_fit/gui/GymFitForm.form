@@ -33,7 +33,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="5410e" class="javax.swing.JTable" binding="clientTable">
+              <component id="5410e" class="javax.swing.JTable" binding="clientTable" custom-create="true">
                 <constraints/>
                 <properties/>
               </component>
