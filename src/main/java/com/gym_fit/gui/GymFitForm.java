@@ -11,6 +11,7 @@ import javax.swing.*;
 public class GymFitForm extends JFrame {
     IClientService clientService;
     private JPanel mainPanel;
+    private JTable clientTable;
 
     @Autowired
     public GymFitForm(ClientService clientService) {
