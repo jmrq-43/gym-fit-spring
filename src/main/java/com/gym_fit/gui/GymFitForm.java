@@ -7,12 +7,19 @@ import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionListener;
 
 @Component
 public class GymFitForm extends JFrame {
     IClientService clientService;
     private JPanel mainPanel;
     private JTable clientTable;
+    private JTextField nameText;
+    private JTextField lastNameText;
+    private JTextField membershipText;
+    private JButton saveButton;
+    private JButton deleteButton;
+    private JButton clearButton;
     private DefaultTableModel tableModel;
 
     @Autowired
