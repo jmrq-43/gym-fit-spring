@@ -85,7 +85,7 @@ public class GymFitForm extends JFrame {
         var lastName = lastNameText.getText();
         var membership = Integer.parseInt(membershipText.getText());
 
-        var client = new Client(name, lastName, membership);
+        var client = new Client(this.idClient, name, lastName, membership);
         this.clientService.saveClient(client);
         cleanform();
         listClients();
