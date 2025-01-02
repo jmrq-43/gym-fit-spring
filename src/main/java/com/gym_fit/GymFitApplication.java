@@ -12,7 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.util.List;
 import java.util.Scanner;
 
-@SpringBootApplication
+//@SpringBootApplication
 public class GymFitApplication implements CommandLineRunner {
     private static final Logger logger =
             LoggerFactory.getLogger(GymFitApplication.class);
