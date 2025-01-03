@@ -4,6 +4,7 @@
 
 **application.properties** is not in the repository because I currently do not know a way to ensure that the database password is not in plain text. but...
 
+---
 ``` 
 spring.application.name=gym_fit
 
@@ -21,3 +22,23 @@ spring.jpa.show-sql=false
 spring.main.web-application-type=none'
 
 ``` 
+---
+## Architecture diagram 
+```mermaid
+flowchart
+    A[model] --> B[dataBase]
+    B --> A
+    C[repository] --> D[service]
+    A --> D
+    D --> E[GUI]     
+```
+---
+
+## DATA BASE QUERY
+```sql
+CREATE TABLE client (
+    ID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    NAME VARCHAR(43),
+    MEMBERSHIP INT UNIQUE
+);
+```
